@@ -17,13 +17,13 @@ class TodoForm extends Component {
     handleSubmit = e => {
         e.preventDefault(); //prevents screen re-fresh 
         this.props.addItem({
-            task: this.state.task
+            task: this.state.task,
+            id: Date.now(),
+            completed: false
         })
         this.setState({ // clears form - removes text 
             task: ''
         })
-        
-
     }
 
     render() { 
@@ -31,7 +31,7 @@ class TodoForm extends Component {
             <form onSubmit={this.handleSubmit}>
                 <input 
                     onChange={this.handleInputChange}
-                    placeHolder = "To Do"
+                    placeholder = "To Do"
                     value = {this.state.task}
                     name = 'task' 
                 />
@@ -40,5 +40,6 @@ class TodoForm extends Component {
          );
     }
 }
+
  
 export default TodoForm;
