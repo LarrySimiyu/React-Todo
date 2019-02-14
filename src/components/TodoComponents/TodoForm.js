@@ -22,6 +22,7 @@ class TodoForm extends Component {
         this.setState({ // clears form - removes text 
             task: ''
         })
+        
 
     }
 
