@@ -26,35 +26,19 @@ class App extends Component {
   }
 
   // on this page so it can be passed down as a prop
-  
-  // toggleItem = todoId => {
-  //   this.setState({
-  //     list: this.state.list.map(todo => {
-  //       if(todoId === todo.id) {
-  //         return {
-  //           ...todo, completed: !todo.completed
-  //           //copy all properties
-  //         };
-  //       }
-  //       return todo;
-  //     })
-  //   });
-  // };
-
-  toggleItem = todoId => {
-    
-      list: this.state.list.map(todo => {
-        if(todoId === todo.id) {
-          return {
-            ...todo, completed: !todo.completed
-            //copy all properties
-          };
-        }
-        return todo;
-      })
-
-    }
+  toggleItem = itemId => {
+    this.setState({
+      list: this.state.list.map(task => itemId === task.id ? {...task, completed: !task.completed } : task)
+   
+    })
+      console.log(itemId); //to make sure its working
   }
+  
+  clearCompleted = () => {
+    this.setState({
+    list: this.state.list.filter(task => task.completed !== true )
+  })
+}
 
   render() {  //what will be shown on screen
     return ( 
@@ -62,7 +46,8 @@ class App extends Component {
         <h1>REACT TO DO</h1>
         {/* //passing in as props */}
         <TodoForm addItem={this.addItem}/> 
-        <TodoList list={this.state.list} toggleItem={this.toggleItem}/>
+        <TodoList list={this.state.list} toggleItem={this.toggleItem} />
+        <button onClick={this.clearCompleted}>CLEAR</button>
       </div>
      );
   }
